@@ -34,12 +34,12 @@ $$
 Una manera equivalente de entender la regla es imaginar una propensión continua no observada:
 
 $$
-y^{*}_{ik} = \eta_{ik} + \epsilon_{ik},
+y^{\ast}_{ik} = \eta_{ik} + \epsilon_{ik},
 \qquad \epsilon_{ik} \sim \mathcal{N}(0,1),
 \qquad y_{ik} =
 \begin{cases}
-1 & \text{si } y^{*}_{ik}>0,\\
-0 & \text{si } y^{*}_{ik}\leq 0.
+1 & \text{si } y^{\ast}_{ik}>0,\\
+0 & \text{si } y^{\ast}_{ik}\leq 0.
 \end{cases}
 $$
 
@@ -252,7 +252,7 @@ R_{\mathrm{filogenética},ij}\Sigma_{\mathrm{filogenética},kl}
 \mathrm{Cov}(\alpha_k,\alpha_l).
 $$
 
-El último término aparece porque el intercepto de cada rasgo es compartido por todas las lenguas. Con los priors independientes actuales, es cero entre rasgos distintos e igual a intercept_scale² para el mismo rasgo. El ruido probit independiente aparece al pasar del predictor η a la propensión $y^{*}$; su varianza se fija en 1 y no forma parte de la covarianza estructurada de η.
+El último término aparece porque el intercepto de cada rasgo es compartido por todas las lenguas. Con los priors independientes actuales, es cero entre rasgos distintos e igual a intercept_scale² para el mismo rasgo. El ruido probit independiente aparece al pasar del predictor η a la propensión $y^{\ast}$; su varianza se fija en 1 y no forma parte de la covarianza estructurada de η.
 
 Esta suma explica por qué no hay una sola matriz que represente todo: el componente espacial y el filogenético tienen distintas matrices de lenguas y, además, pueden tener distintas covarianzas entre rasgos.
 
