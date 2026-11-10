@@ -1,0 +1,60 @@
+{
+  "name": "gbi_statistical_multirrespuesta_mcc",
+  "dataset": "gbi_statistical",
+  "dataset_label": "Grambank · curación estadística",
+  "source_release": "crossling-curated v1.0.0",
+  "source_table": "statisticalGBI.csv",
+  "curation": "statisticalGBI",
+  "features": [
+    {
+      "id": "GB035",
+      "source_column": "GB035",
+      "slug": "demonstrative_distance",
+      "name": "Contrastes de distancia en demostrativos",
+      "description": "Indica si el sistema de demostrativos distingue tres o más distancias.",
+      "positive_label": "Tres o más distancias",
+      "negative_label": "Menos de tres distancias",
+      "class_codes": {"0": 0, "1": 1},
+      "excluded_codes": {}
+    },
+    {
+      "id": "GB480m",
+      "source_column": "GB480m",
+      "slug": "morphological_case",
+      "name": "Caso morfológico",
+      "description": "Indica si la lengua marca caso mediante morfología.",
+      "positive_label": "Presente",
+      "negative_label": "Ausente",
+      "class_codes": {"0": 0, "1": 1},
+      "excluded_codes": {}
+    },
+    {
+      "id": "GB132",
+      "source_column": "GB132",
+      "slug": "verb_medial_order",
+      "name": "Orden verbo-medial en cláusulas transitivas",
+      "description": "Indica si el orden pragmáticamente no marcado en cláusulas transitivas es verbo-medial.",
+      "positive_label": "Verbo-medial",
+      "negative_label": "Otro orden",
+      "class_codes": {"0": 0, "1": 1},
+      "excluded_codes": {}
+    },
+    {
+      "id": "GB408",
+      "source_column": "GB408",
+      "slug": "accusative_alignment",
+      "name": "Alineamiento acusativo en la marcación",
+      "description": "Indica si la lengua presenta algún alineamiento acusativo en la marcación.",
+      "positive_label": "Presente",
+      "negative_label": "Ausente",
+      "class_codes": {"0": 0, "1": 1},
+      "excluded_codes": {}
+    }
+  ],
+  "tree_source": "mcc",
+  "phylogenetic_structure": "within_family",
+  "normalize_phylogeny": true,
+  "test_fraction": 0.2,
+  "seed": 20261105,
+  "tree_release": "v2.0.0"
+}

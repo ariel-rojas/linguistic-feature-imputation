@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.venv/
+.ruff_cache/
+.pytest_cache/
+.vscode/
+tmp/
+data/source/*
+!data/source/gbi/
+data/source/gbi/*
+!data/source/gbi/README.md
+data/processed/
+results/*
+!results/README.md

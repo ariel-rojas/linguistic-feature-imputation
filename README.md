@@ -115,4 +115,3 @@ El split es aleatorio, estratificado por clase y agrupado por glottocódigo; no 
 - Grambank Independent (GBI), Graff et al. (2025), [artículo](https://doi.org/10.1038/s41597-024-04319-4), [release y scripts](https://github.com/annagraff/crossling-curated), [datos v1.0.0](https://doi.org/10.5281/zenodo.14606326). Datos bajo licencia CC BY 4.0.
 - Global Language Tree Pipeline, [release v2.0.0](https://github.com/rbouckaert/global-language-tree-pipeline/releases/tag/v2.0.0).
 
-

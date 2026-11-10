@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Modelo y distribuciones · Rasgos lingüísticos</title>
+    <style>__STYLE__</style>
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="header-row">
+        <div>
+          <p class="eyebrow">Imputación bayesiana multirrespuesta · __DATASET_LABEL__</p>
+          <h1>Modelo y resultados</h1>
+          <p class="lede">Sigue cada rasgo desde la tendencia global hasta sus efectos espaciales y filogenéticos; compara priors y posteriores.</p>
+        </div>
+        <div class="header-links">
+          <a class="map-link" href="../index.html">Cambiar conjunto</a>
+          <a class="map-link" href="map.html">Abrir mapa global ↗</a>
+        </div>
+      </div>
+      <div id="runWarning" role="status"></div>
+    </header>
+
+    <main>
+      <nav class="tabs" aria-label="Apartados del explorador">
+        <button id="parametersTab" aria-pressed="true">Modelo y componentes</button>
+        <button id="predictionsTab" aria-pressed="false">Predicciones por lengua</button>
+        <button id="metricsTab" aria-pressed="false">Métricas y cobertura</button>
+      </nav>
+
+      <section id="parameterView" class="model-view">
+        <section class="model-intro">
+          <p class="eyebrow">Ecuación base del modelo probit</p>
+          <div class="equation-block">
+            <p class="equation">ηᵢₖ = αₖ + gᵢₖ + hᵢₖ</p>
+            <p class="equation">P(yᵢₖ = 1) = Φ(ηᵢₖ)</p>
+          </div>
+          <div class="term-explanations">
+            <p><strong>αₖ · tendencia global</strong><span>Nivel base del rasgo antes de añadir geografía o genealogía.</span></p>
+            <p><strong>gᵢₖ · efecto espacial</strong><span>Desviación relacionada con las ubicaciones de las lenguas.</span></p>
+            <p><strong>hᵢₖ · efecto filogenético</strong><span>Desviación relacionada con las ramas compartidas del árbol.</span></p>
+          </div>
+          <p class="model-note">Φ transforma la puntuación probit η en una probabilidad entre 0 y 1. Las celdas faltantes no se tratan como ceros: se predicen después del ajuste.</p>
+        </section>
+
+        <section class="model-controls" aria-label="Elegir rasgo y ajuste">
+          <div>
+            <label for="parameterFeature">Rasgo lingüístico</label>
+            <select id="parameterFeature"><option value="">Selecciona un rasgo para ver sus componentes</option></select>
+          </div>
+          <div>
+            <label for="parameterStage">Ajuste</label>
+            <select id="parameterStage">
+              <option value="evaluation">Evaluación · entrenamiento</option>
+              <option value="imputation">Imputación · todos los valores observados</option>
+            </select>
+          </div>
+        </section>
+
+        <div id="parameterCards" aria-live="polite">
+          <p class="empty-state">Selecciona un rasgo para abrir sus distribuciones y componentes.</p>
+        </div>
+        <div id="priorCards" hidden></div>
+        <section class="panel diagnostics-panel">
+          <h2>Diagnósticos del muestreo</h2>
+          <div id="diagnostics"></div>
+          <p class="muted">R-hat alto, tamaño efectivo bajo, divergencias o topes de profundidad advierten que la posterior puede no haberse explorado bien. En ese caso, trata las distribuciones como exploratorias.</p>
+        </section>
+      </section>
+
+      <section id="predictionView" class="view" hidden>
+        <aside class="controls panel">
+          <h2>Elegir etapa y rasgo</h2>
+          <label for="stage">Etapa</label>
+          <select id="stage">
+            <option value="evaluation">Evaluación · train/test</option>
+            <option value="imputation">Imputación · todos los observados</option>
+          </select>
+          <p id="stageExplanation" class="muted"></p>
+          <label for="feature">Rasgo lingüístico</label>
+          <select id="feature"></select>
+          <label for="search">Buscar lengua</label>
+          <input id="search" type="search" placeholder="Nombre, código o familia" />
+          <label for="caseList">Seleccionar caso</label>
+          <select id="caseList" size="12"></select>
+          <p id="caseCount" class="muted"></p>
+          <div class="how-it-works">
+            <b>Qué significa cada etapa</b>
+            <p><b>Evaluación:</b> el modelo aprende con train y predice el test reservado.</p>
+            <p><b>Imputación:</b> vuelve a ajustarse con todas las respuestas observadas y predice los faltantes elegibles.</p>
+          </div>
+        </aside>
+        <article id="casePanel">
+          <section id="stageSummary" class="summary-grid"></section>
+          <section class="panel case-heading">
+            <p id="caseStage" class="eyebrow"></p>
+            <h2 id="languageName">Selecciona una lengua</h2>
+            <p id="languageMeta" class="muted"></p>
+            <div id="caseOutcome"></div>
+          </section>
+          <section class="panel">
+            <h3>Distribución posterior de la probabilidad</h3>
+            <p id="probabilityDescription" class="muted"></p>
+            <div id="probabilityChart" class="histogram"></div>
+            <p id="drawCount" class="muted"></p>
+          </section>
+          <details class="panel">
+            <summary>Cómo interpretar esta distribución</summary>
+            <p>Cada muestra posterior produce un valor posible para la probabilidad de la clase positiva. El ancho del histograma resume incertidumbre sobre esa probabilidad; no representa una distribución de hablantes ni de lenguas.</p>
+            <p>La probabilidad predictiva es el promedio de las muestras. La probabilidad de la clase negativa es uno menos ese promedio.</p>
+          </details>
+        </article>
+      </section>
+
+      <section id="metricsView" class="view" hidden>
+        <section class="panel">
+          <h2>Rendimiento en datos reservados</h2>
+          <p class="muted">Cada rasgo se evalúa en sus propias lenguas de test. Las barras muestran métricas donde valores mayores son mejores; las pérdidas se muestran por separado.</p>
+          <div id="metricCards" class="feature-metrics-grid"></div>
+          <h3>Calidad de las probabilidades</h3>
+          <div id="lossTable"></div>
+        </section>
+        <section class="panel coverage-panel">
+          <h2>Cobertura y partición de datos</h2>
+          <p class="muted">El split se estratifica por clase y agrupa por glottocódigo. Se realiza por separado para cada rasgo; una lengua puede ser train para uno y test para otro.</p>
+          <div id="coverageTable"></div>
+          <p class="muted">«Fuera de alcance» son categorías excluidas de la respuesta binaria. «Excluidas» son lenguas que no cumplieron requisitos de alineación, coordenadas o datos necesarios.</p>
+        </section>
+        <section class="panel metric-notes">
+          <h2>Cómo leer las métricas</h2>
+          <ul>
+            <li><b>Exactitud y exactitud balanceada:</b> proporción de aciertos; la balanceada promedia el acierto de cada clase.</li>
+            <li><b>AUC:</b> capacidad de ordenar positivos por encima de negativos a través de umbrales.</li>
+            <li><b>Precisión, recall y F1:</b> resumen de detección de la clase positiva usando umbral 0,5.</li>
+            <li><b>MCC:</b> correlación entre clases reales y predichas; 1 es perfecto, 0 equivale a ausencia de asociación y -1 a desacuerdo total.</li>
+            <li><b>Brier y log-loss:</b> penalizan probabilidades mal calibradas; valores menores son mejores.</li>
+          </ul>
+          <div id="metricDiagnostics"></div>
+        </section>
+      </section>
+    </main>
+
+    <footer>
+      <a href="map.html">Mapa global</a>
+      <span>·</span>
+      <button class="footer-button" id="metricsFooter">Métricas de esta ejecución</button>
+      <span>·</span>
+      <span>Los draws proceden del pipeline; esta página no reajusta el modelo.</span>
+    </footer>
+    <script id="data" type="application/json">__DATA__</script>
+    <script>__SCRIPT__</script>
+  </body>
+</html>

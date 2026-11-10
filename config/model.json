@@ -1,0 +1,55 @@
+{
+  "name": "imputacion_linguistica_multirrespuesta_mcc",
+  "dataset": "wals",
+  "dataset_label": "WALS · panel de tres rasgos",
+  "features": [
+    {
+      "id": "83A",
+      "slug": "vo",
+      "name": "Orden objeto-verbo",
+      "positive_label": "VO",
+      "negative_label": "OV",
+      "class_codes": {
+        "83A-1": 0,
+        "83A-2": 1
+      },
+      "excluded_codes": {
+        "83A-3": "Sin dominante"
+      }
+    },
+    {
+      "id": "9A",
+      "slug": "velar_nasal",
+      "name": "Nasal velar /ŋ/",
+      "positive_label": "Presente",
+      "negative_label": "Ausente",
+      "class_codes": {
+        "9A-1": 1,
+        "9A-2": 1,
+        "9A-3": 0
+      },
+      "excluded_codes": {}
+    },
+    {
+      "id": "6A",
+      "slug": "uvulars",
+      "name": "Consonantes uvulares",
+      "description": "Presencia de consonantes uvulares; las cuatro categorías con uvulares se agrupan como presencia.",
+      "positive_label": "Presentes",
+      "negative_label": "Ausentes",
+      "class_codes": {
+        "6A-1": 0,
+        "6A-2": 1,
+        "6A-3": 1,
+        "6A-4": 1
+      },
+      "excluded_codes": {}
+    }
+  ],
+  "tree_source": "mcc",
+  "phylogenetic_structure": "within_family",
+  "normalize_phylogeny": true,
+  "test_fraction": 0.2,
+  "seed": 20261104,
+  "tree_release": "v2.0.0"
+}

@@ -1,0 +1,17 @@
+{
+  "chains": 2,
+  "warmup": 500,
+  "draws": 200,
+  "predictive_draws": 400,
+  "target_accept": 0.85,
+  "max_tree_depth": 7,
+  "amplitude_scale": 1.0,
+  "trait_correlation_concentration": 2.0,
+  "intercept_scale": 1.5,
+  "smoothing_median": 0.001,
+  "smoothing_log_sd": 1.5,
+  "degree_min": 4.0,
+  "degree_max": 16.0,
+  "degree_taper_width": 0.25,
+  "seed": 20261106
+}

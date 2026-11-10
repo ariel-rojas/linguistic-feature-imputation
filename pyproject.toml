@@ -1,0 +1,35 @@
+[project]
+name = "linguistic-feature-imputation"
+version = "0.1.0"
+description = "Imputación bayesiana multirrespuesta de rasgos lingüísticos con dependencia espacial y filogenética"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "arviz>=0.22.0",
+    "biopython>=1.86",
+    "folium>=0.20.0",
+    "jax>=0.6.0",
+    "languages-of-the-world>=0.2.0",
+    "numpy>=2.0.0",
+    "numpyro>=0.19.0",
+    "pandas>=2.2.0",
+    "scikit-learn>=1.6.0",
+    "scipy>=1.14.0",
+]
+
+[project.scripts]
+lingfeat = "linguistic_features.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.12.16,<0.13.0"]
+build-backend = "uv_build"
+
+[tool.uv]
+package = true
+
+[tool.uv.build-backend]
+module-name = "linguistic_features"
+module-root = "src"
+
+[tool.uv.sources]
+
