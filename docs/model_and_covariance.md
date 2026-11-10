@@ -34,12 +34,12 @@ $$
 Una manera equivalente de entender la regla es imaginar una propensión continua no observada:
 
 $$
-y^*_{ik} = \eta_{ik} + \epsilon_{ik},
+y^{*}_{ik} = \eta_{ik} + \epsilon_{ik},
 \qquad \epsilon_{ik} \sim \mathcal{N}(0,1),
 \qquad y_{ik} =
 \begin{cases}
-1 & \text{si } y^*_{ik}>0,\\
-0 & \text{si } y^*_{ik}\leq 0.
+1 & \text{si } y^{*}_{ik}>0,\\
+0 & \text{si } y^{*}_{ik}\leq 0.
 \end{cases}
 $$
 
@@ -123,7 +123,7 @@ La multiplicación no afirma que genealogía y geografía sean el mismo fenómen
 El código no construye la enorme matriz Σ ⊗ R. Usa factores de menor tamaño y obtiene la misma distribución. Si R = C Cᵀ y Σ = T Tᵀ, se puede generar:
 
 $$
-G = C Z T^\mathsf{T},
+G = C Z T^{\mathsf{T}},
 \qquad Z_{ab}\ \text{independientes con}\ Z_{ab}\sim\mathcal{N}(0,1).
 $$
 
@@ -142,7 +142,7 @@ Los patrones de grado bajo describen cambios amplios; los de grado alto permiten
 $$
 w_\ell =
 \frac{\mathrm{logistic}((L+1/2-\ell)/\tau)}
-{1+\lambda[\ell(\ell+1)]^2},
+{1+\lambda[\ell(\ell+1)]^{2}},
 \qquad
 D_{mm} =
 \sqrt{\frac{w_{\ell(m)}}{\sum_q w_{\ell(q)}}}.
@@ -156,11 +156,11 @@ $$
 Z_{\mathrm{esp}}\sim\mathcal{N}(0,I),
 \qquad
 G_{\mathrm{esp}} =
-B D Z_{\mathrm{esp}} T_{\mathrm{esp}}^\mathsf{T},
+B D Z_{\mathrm{esp}} T_{\mathrm{esp}}^{\mathsf{T}},
 $$
 
 $$
-R_{\mathrm{espacial}} = B D^2 B^\mathsf{T}.
+R_{\mathrm{espacial}} = B D^{2} B^{\mathsf{T}}.
 $$
 
 B D es un factor de la covarianza espacial, pues (B D)(B D)ᵀ = B D² Bᵀ. Los pesos normalizados hacen que la diagonal de R espacial sea uno, salvo redondeo numérico. Así, la amplitud de cada rasgo queda en Σ espacial y R espacial se concentra en describir la forma de la dependencia entre ubicaciones.
@@ -177,7 +177,7 @@ $$
 C^{\mathrm{árbol}}_{ij} = \sum_{e\in P_i\cap P_j} t_e.
 $$
 
-Dos lenguas que comparten una historia reciente acumulan más ramas compartidas. La diagonal C^{árbol}_{ii} es la longitud total de la raíz a la hoja i.
+Dos lenguas que comparten una historia reciente acumulan más ramas compartidas. La diagonal $C^{\mathrm{árbol}}_{ii}$ es la longitud total de la raíz a la hoja $i$.
 
 El código transforma esa covarianza en correlación:
 
@@ -192,10 +192,10 @@ Luego se obtiene un factor A fil tal que:
 
 $$
 R_{\mathrm{filogenética}} =
-A_{\mathrm{fil}}A_{\mathrm{fil}}^\mathsf{T},
+A_{\mathrm{fil}}A_{\mathrm{fil}}^{\mathsf{T}},
 \qquad
 G_{\mathrm{fil}} =
-A_{\mathrm{fil}} Z_{\mathrm{fil}} T_{\mathrm{fil}}^\mathsf{T}.
+A_{\mathrm{fil}} Z_{\mathrm{fil}} T_{\mathrm{fil}}^{\mathsf{T}}.
 $$
 
 A fil es una raíz matricial de R fil; no es la matriz original de tiempos compartidos. Tampoco se invierte R fil. La factorización permite generar efectos correlacionados usando normales independientes. Para predecir lenguas objetivo, el código condiciona sus efectos filogenéticos a las lenguas de entrenamiento y agrega la incertidumbre residual correspondiente.
@@ -252,7 +252,7 @@ R_{\mathrm{filogenética},ij}\Sigma_{\mathrm{filogenética},kl}
 \mathrm{Cov}(\alpha_k,\alpha_l).
 $$
 
-El último término aparece porque el intercepto de cada rasgo es compartido por todas las lenguas. Con los priors independientes actuales, es cero entre rasgos distintos e igual a intercept_scale² para el mismo rasgo. El ruido probit independiente aparece al pasar del predictor η a la propensión y*; su varianza se fija en 1 y no forma parte de la covarianza estructurada de η.
+El último término aparece porque el intercepto de cada rasgo es compartido por todas las lenguas. Con los priors independientes actuales, es cero entre rasgos distintos e igual a intercept_scale² para el mismo rasgo. El ruido probit independiente aparece al pasar del predictor η a la propensión $y^{*}$; su varianza se fija en 1 y no forma parte de la covarianza estructurada de η.
 
 Esta suma explica por qué no hay una sola matriz que represente todo: el componente espacial y el filogenético tienen distintas matrices de lenguas y, además, pueden tener distintas covarianzas entre rasgos.
 
@@ -317,5 +317,6 @@ Los resultados y diagnósticos actuales se consultan desde el portal o en result
 - Guzmán Naranjo y Becker (2022), [Statistical control of areal and genealogical biases](https://doi.org/10.1515/lingty-2021-0002).
 - Release MCC v2.0.0 del [Global Language Tree Pipeline](https://github.com/rbouckaert/global-language-tree-pipeline/releases/tag/v2.0.0).
 - Graff et al. (2025), [Curating global datasets of structural linguistic features for independence](https://doi.org/10.1038/s41597-024-04319-4).
+
 
 
